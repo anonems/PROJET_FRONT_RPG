@@ -29,12 +29,5 @@ body{
     transform: translate(-50%, -50%); 
     
 }
-.circle {
-    height: 80px;
-    width: 80px;
-    background-color: transparent;
-    background-image: url("../../data/perso.png");  
-    background-size: 80%;
-    background-repeat: no-repeat;
-}
+
 
