@@ -3,7 +3,7 @@ let myMap = document.getElementById('mapzone')
 
 
 window.addEventListener('load', () =>{
-    myPerso.style.backgroundImage = "url(/data/perso.png)"
+    myPerso.style.backgroundImage = "url(data/perso.png)"
     myPerso.style.backgroundSize = "50px"
     myPerso.style.width = "50px"
     myPerso.style.height = "50px"
