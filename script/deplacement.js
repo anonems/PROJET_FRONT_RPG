@@ -5,7 +5,6 @@ let ligne = 0;
 let colonne = 0;
 let livres = 0
 let key = 0
-let parole = 0
 let valeurs
 let valeurs1 = []
     valeurs1 = [
@@ -20,12 +19,12 @@ let valeurs1 = []
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', ' '],
 		[' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', '-', '!', '!', '-', ' ', ' ', ' ', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
-		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', '*'],
 		[' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '~', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		['+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', '+']
@@ -48,9 +47,9 @@ let valeurs1 = []
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', '+', ' ', '-'],
-		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#', ' ', ' ', '-'],
-		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
 	]
     let valeurs3 = []
@@ -71,7 +70,7 @@ let valeurs1 = []
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
-		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '+', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '+', ' ', ' ', ' ', '-'],
 		['-', '-', '+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']	
@@ -103,7 +102,7 @@ let valeurs1 = []
 valeurs = valeurs1
 function recup_livre(){
     if (valeurs[ligne][colonne] == "+"){
-        if( window.confirm("voulez-vous récupérer ce livre ?") ){
+        if( window.confirm("voulez-vous déposer votre CV ici ?") ){
             livres++
             valeurs[ligne][colonne] = ' '
         }
@@ -150,14 +149,34 @@ function open_door3(){
         }
     }
 }
+let parole = 0
 function dialogue(){
     if (valeurs[ligne][colonne] == "*"){
-        if (parole == 0){
+        parole++
+        if (parole == 1){
             alert('Bonjour et bienvenu à hetic !')
-            alert('Pour décrocher ton stage tu doit récupérer 9 livres cachés sur les différentes maps...')
+            alert('Pour décrocher ton stage  et etres eventuellement recruter, tu doit déposer ton CV dans 9 sociétés cachés sur les différentes maps...')
             alert('Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...')
-        }else if (parole == 1){
-            
+        }else if (parole == 2){
+            if(prompt('Bonjour, avez vous besoin d\'aide?') == 'oui'){
+                prompt(" je cherche la société ", "HeTiC")
+                alert('elle se trouve en haut du classement.')
+            }
+        }else if (parole == 3){
+            prompt('parlez a ce personnage')
+            alert('je n\'ai pas de temps à perdre')
+        }
+        else if (parole == 3){
+            if(livres < 3){
+                alert('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente, tu peut toujours y retourner.')
+            }
+            else {alert('Salut, bravo tu à franchi la première étape, à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
+        }
+        else if (parole == 4){
+            if(livres < 6){
+                alert('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente, tu peut toujours y retourner.')
+            }
+            else {alert('Salut, bravo tu à franchi la deuxième étape, à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
         }
             
         
