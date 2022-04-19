@@ -1,12 +1,37 @@
-
 let mobile = document.querySelector("#mobile");
 
 // Position initiale de mon élément
-let ligne = 4;
-let colonne = 5;
+let ligne = 0;
+let colonne = 0;
+let livres = 0
+let key = 0
 
 mobile.style.gridColumn = colonne;
 mobile.style.gridRow = ligne;
+
+let valeurs = []
+    valeurs = [
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', '#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', ' '],
+		[' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', '-', ' ', ' ', '-', ' ', ' ', ' ', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', ' '],
+		[' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ']
+	]
 
 // La fonction de déplacement
 function deplacement(event) {
@@ -23,77 +48,106 @@ function deplacement(event) {
 
     // fleche haut
     if (touche == "ArrowUp") {
-        if (ligne > 1) {
-            C.style.backgroundImage = "url(data/perso_dos.png)"
-            C.style.backgroundColor = 'transparent'
-            ligne--; // On enlève 1 à la ligne
+        if (valeurs[ligne-1][colonne] != '-'){
+            if (ligne > 1) {
+                C.style.backgroundImage = "url(data/perso_dos.png)"
+                C.style.backgroundColor = 'transparent'
+                ligne--; // On enlève 1 à la ligne
+            
+                if (valeurs[ligne-1][colonne] == "+"){
+                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
+                        livres++
+                        valeurs[ligne-1][colonne] = ' '
+                    }
+                }
+                if (valeurs[ligne-1][colonne] == "#"){
+                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
+                        key++
+                        valeurs[ligne-1][colonne] = ' '
+                    }
+                }
+            }
         }
-        console.log("haut, ligne : " + ligne);
     }
+
     // fleche bas
     else if (touche == "ArrowDown") {
-        if (ligne < 20) {
-            C.style.backgroundImage = "url(data/perso.png)"
-            C.style.backgroundColor = 'transparent'
-            ligne++; // On ajoute 1 à la ligne
+        if (valeurs[ligne+1][colonne] != '-'){
+            if (ligne < 20) {
+                C.style.backgroundImage = "url(data/perso.png)"
+                C.style.backgroundColor = 'transparent'
+                ligne++; // On ajoute 1 à la ligne
+            
+                if (valeurs[ligne+1][colonne] == "+"){
+                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
+                        livres++
+                        valeurs[ligne+1][colonne] = ' '
+                    }
+                }
+                if (valeurs[ligne+1][colonne] == "#"){
+                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
+                        key++
+                        valeurs[ligne+1][colonne] = ' '
+                    }
+                }
+            }
         }
-        console.log("bas, ligne : " + ligne);
     }
-    // fleche gauche
+        // fleche gauche
     else if (touche == "ArrowLeft") {
-        if (colonne > 1) {
-            C.style.backgroundImage = "url(data/perso_gauche.png)"
-            C.style.backgroundColor = 'transparent'
-            colonne--; // On enlève 1 à la colonne
+        if (valeurs[ligne][colonne-1] != '-'){
+            if (colonne > 1) {
+                C.style.backgroundImage = "url(data/perso_gauche.png)"
+                C.style.backgroundColor = 'transparent'
+                colonne--; // On enlève 1 à la colonne
+        
+                if (valeurs[ligne][colonne-1] == "+"){
+                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
+                        livres++
+                        valeurs[ligne][colonne-1] = ' '
+                    }
+                }
+                if (valeurs[ligne][colonne-1] == "#"){
+                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
+                        key++
+                        valeurs[ligne][colonne-1] = ' '
+                    }
+                }
+            }
         }
-        console.log("gauche, colonne : " + colonne);
     }
-    // fleche droite
+        // fleche droite
     else if (touche == "ArrowRight") {
-        if (colonne < 20) {
-            C.style.backgroundImage = "url(data/perso_droite.png)"
-            C.style.backgroundColor = 'transparent'
-            colonne++; // On ajoute 1 à la colonne
+        if (valeurs[ligne][colonne+1] != '-'){
+            if (colonne < 20) {
+                C.style.backgroundImage = "url(data/perso_droite.png)"
+                C.style.backgroundColor = 'transparent'
+                colonne++; // On ajoute 1 à la colonne
+            
+                if (valeurs[ligne][colonne+1] == "+"){
+                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
+                        livres++
+                        valeurs[ligne][colonne+1] = ' '
+                    }
+                }
+                if (valeurs[ligne][colonne+1] == "#"){
+                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
+                        key++
+                        valeurs[ligne][colonne+1] = ' '
+                    }
+                }
+            }
         }
-        console.log("droite, colonne : " + colonne);
     }
 
-    // Récupération de l'élément
-    let mobile = document.querySelector("#mobile");
+        // Récupération de l'élément
+        let mobile = document.querySelector("#mobile");
 
-    // Positionner l'élément
-    mobile.style.gridColumn = colonne;
-    mobile.style.gridRow = ligne;
+        // Positionner l'élément
+        mobile.style.gridColumn = colonne;
+        mobile.style.gridRow = ligne;
 }
 
 // L'évènement sur le document
 document.onkeyup = deplacement;
-
-
-function vals(){
-    let valeurs = []
-    for (let i = 0; i < 9; i++) {
-        valeurs[i] = [
-            ["table", 1], 
-            ["mur", 2], 
-            ["terre", 3],
-            ["porte", 4],
-            ["toit",5], 
-            ["brick", 6],
-            ["sel",7], 
-            ["buisson",8], 
-            ["buisson",9], 
-            ["buisson",10],
-        ]     
-    }
-    return valeurs
-}
-    let valeursbis = vals()
-    //document.getElementById("ok").innerHTML = valeursbis
-
-    for(let l=0; l<3;l++){
-        for(let m=0; m<3; m++){
-        document.getElementById("namm").innerHTML = "<li style='grid-column:"+valeursbis[l][m][1]+"' >"+valeursbis[l][m][0]+"</li>"
-    }
-}
 
