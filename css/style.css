@@ -4,11 +4,9 @@ body{
     font-family: 'MedievalSharp', cursive;
 }
 .mapzone{
-    width:80%;
-    height: 80%;
     background-color: #BFC3C5;
-    background-size: cover;
-    border-radius: 30px;
+    background-size: 500px 500px;
+    border-radius: 15px;
     overflow: hidden;
     text-align: center;
     position: absolute;
@@ -17,9 +15,10 @@ body{
     transform: translate(-50%, -50%);
     margin: 0px;
     padding: 0px;
-    display: inline-grid;    background-image: url('https://i.stack.imgur.com/NaUX7.png');
-    grid-template-columns: repeat(10,50px);
-    grid-template-rows: repeat(10, 50px);
+    display: inline-grid;    
+    background-image: url('/data/main-map.png');
+    grid-template-columns: repeat(20, 25px);
+    grid-template-rows: repeat(20, 25px);
     background-repeat: no-repeat;
 }
 #begin{
@@ -49,9 +48,9 @@ color: white;
     color: red;
     }
 
-    #mobile {
-        background-color: white;
-        background-image: url("data/perso.png");
-    }
+#mobile {
+    background-color: white;
+    background-image: url("data/perso.png");
+}
     
    

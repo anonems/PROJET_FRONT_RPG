@@ -13,9 +13,9 @@ function deplacement(event) {
     let touche = event.key;
     var C = document.getElementById("mobile")
     C.style.backgroundImage = "url(data/perso.png)"
-    C.style.backgroundSize = "50px"
+    C.style.backgroundSize = "25px"
     C.style.width = "50px"
-    C.style.height = "100px"
+    C.style.height = "50px"
     C.style.backgroundRepeat = "no-repeat"
  	C.style.position = 'absolute';
  	C.style.left = 0;
@@ -32,7 +32,7 @@ function deplacement(event) {
     }
     // fleche bas
     else if (touche == "ArrowDown") {
-        if (ligne < 10) {
+        if (ligne < 20) {
             C.style.backgroundImage = "url(data/perso.png)"
             C.style.backgroundColor = 'transparent'
             ligne++; // On ajoute 1 à la ligne
@@ -50,7 +50,7 @@ function deplacement(event) {
     }
     // fleche droite
     else if (touche == "ArrowRight") {
-        if (colonne < 10) {
+        if (colonne < 20) {
             C.style.backgroundImage = "url(data/perso_droite.png)"
             C.style.backgroundColor = 'transparent'
             colonne++; // On ajoute 1 à la colonne
