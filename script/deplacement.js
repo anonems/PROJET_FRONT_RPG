@@ -1,19 +1,16 @@
+document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
 let mobile = document.querySelector("#mobile");
-
 // Position initiale de mon élément
 let ligne = 0;
 let colonne = 0;
 let livres = 0
 let key = 0
-
-mobile.style.gridColumn = colonne;
-mobile.style.gridRow = ligne;
-
-let valeurs = []
-    valeurs = [
+let valeurs
+let valeurs1 = []
+    valeurs1 = [
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' '],
-		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		['*', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', '#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
@@ -24,14 +21,132 @@ let valeurs = []
 		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', ' '],
-		[' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', ' ', ' '],
+		[' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '~', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ']
+		['+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', '+']
 	]
+    let valeurs2 = []
+    valeurs2 = [
+		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', '-', '-', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', ' ', '-', '-', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', ' ', '-', '-', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', ' ', '-', '-', ' ', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+	]
+    let valeurs3 = []
+    valeurs3 = [
+        ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', '-', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']	
+    ]
+valeurs = valeurs1
+function recup_livre(){
+    if (valeurs[ligne][colonne] == "+"){
+        if( window.confirm("voulez-vous récupérer ce livre ?") ){
+            livres++
+            valeurs[ligne][colonne] = ' '
+        }
+    }
+}
+function recup_key(){
+    if (valeurs[ligne][colonne] == "#"){
+        if( window.confirm("voulez-vous récupérer cette clefs ?") ){
+            key++
+            valeurs[ligne][colonne] = ' '
+        }
+    }
+}
+function open_door1(){
+    if (valeurs[ligne][colonne] == "_"){
+        if (key<1){
+            alert("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
+        }
+        else if( window.confirm("voulez-vous entrer ?") ){
+            document.getElementById('mapzone').style.backgroundImage = "url('data/map2.png')"
+            valeurs=valeurs2
+        }
+    }
+}
+function open_door2(){
+    if (valeurs[ligne][colonne] == "~"){
+        if (key<1){
+            alert("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
+        }
+        else if( window.confirm("voulez-vous entrer ?") ){
+            document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
+            valeurs=valeurs3
+        }
+    }
+}
+function open_door3(){
+    if (valeurs[ligne][colonne] == "___"){
+        if (key<1){
+            alert("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
+        }
+        else if( window.confirm("voulez-vous entrer ?") ){
+            document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
+            valeurs3=valeurs3
+        }
+    }
+}
+function dialogue(){
+    if (valeurs[ligne][colonne] == "*"){
+        if(alert('Bonjour et bienvenu à hetic !')){
+        }
+    }
+}
+function exit(){
+    if (valeurs[ligne][colonne] == "O"){
+        if( window.confirm("voulez-vous sortir de la salle ?") ){
+            key++
+            valeurs[ligne][colonne] = ' '
+            document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
+            valeurs=valeurs1
+
+        }
+    }
+}
+
+mobile.style.gridColumn = colonne;
+mobile.style.gridRow = ligne;
+
+
 
 // La fonction de déplacement
 function deplacement(event) {
@@ -48,24 +163,19 @@ function deplacement(event) {
 
     // fleche haut
     if (touche == "ArrowUp") {
-        if (valeurs[ligne-1][colonne] != '-'){
+        if (valeurs[ligne-1][colonne] != '-' && valeurs[ligne-1][colonne] != '*'){
             if (ligne > 1) {
                 C.style.backgroundImage = "url(data/perso_dos.png)"
                 C.style.backgroundColor = 'transparent'
                 ligne--; // On enlève 1 à la ligne
             
-                if (valeurs[ligne-1][colonne] == "+"){
-                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
-                        livres++
-                        valeurs[ligne-1][colonne] = ' '
-                    }
-                }
-                if (valeurs[ligne-1][colonne] == "#"){
-                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
-                        key++
-                        valeurs[ligne-1][colonne] = ' '
-                    }
-                }
+                recup_livre()
+                recup_key()
+                open_door1()
+                open_door2()
+                open_door3()
+                dialogue()
+                exit()
             }
         }
     }
@@ -78,18 +188,13 @@ function deplacement(event) {
                 C.style.backgroundColor = 'transparent'
                 ligne++; // On ajoute 1 à la ligne
             
-                if (valeurs[ligne+1][colonne] == "+"){
-                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
-                        livres++
-                        valeurs[ligne+1][colonne] = ' '
-                    }
-                }
-                if (valeurs[ligne+1][colonne] == "#"){
-                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
-                        key++
-                        valeurs[ligne+1][colonne] = ' '
-                    }
-                }
+                recup_livre()
+                recup_key()
+                open_door1()
+                open_door2()
+                open_door3()                
+                dialogue()
+                exit()
             }
         }
     }
@@ -101,18 +206,13 @@ function deplacement(event) {
                 C.style.backgroundColor = 'transparent'
                 colonne--; // On enlève 1 à la colonne
         
-                if (valeurs[ligne][colonne-1] == "+"){
-                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
-                        livres++
-                        valeurs[ligne][colonne-1] = ' '
-                    }
-                }
-                if (valeurs[ligne][colonne-1] == "#"){
-                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
-                        key++
-                        valeurs[ligne][colonne-1] = ' '
-                    }
-                }
+                recup_livre()
+                recup_key()
+                open_door1()
+                open_door2()
+                open_door3()                
+                dialogue()
+                exit()
             }
         }
     }
@@ -124,18 +224,13 @@ function deplacement(event) {
                 C.style.backgroundColor = 'transparent'
                 colonne++; // On ajoute 1 à la colonne
             
-                if (valeurs[ligne][colonne+1] == "+"){
-                    if( window.confirm("voulez-vous récupérer ce livre ?") ){
-                        livres++
-                        valeurs[ligne][colonne+1] = ' '
-                    }
-                }
-                if (valeurs[ligne][colonne+1] == "#"){
-                    if( window.confirm("voulez-vous récupérer cette clefs ?") ){
-                        key++
-                        valeurs[ligne][colonne+1] = ' '
-                    }
-                }
+                recup_livre()
+                recup_key()
+                open_door1()
+                open_door2()
+                open_door3()
+                dialogue()
+                exit()
             }
         }
     }

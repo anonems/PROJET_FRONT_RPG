@@ -16,7 +16,6 @@ body{
     margin: 0px;
     padding: 0px;
     display: inline-grid;    
-    background-image: url('/data/main-map.png');
     grid-template-columns: repeat(20, 25px);
     grid-template-rows: repeat(20, 25px);
     background-repeat: no-repeat;
