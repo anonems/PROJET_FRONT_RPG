@@ -19,7 +19,19 @@ body{
     grid-template-columns: repeat(20, 25px);
     grid-template-rows: repeat(20, 25px);
     background-repeat: no-repeat;
+    /* animation: fadein 2s;  */
 }
+   @keyframes fadein {
+    0% {
+    opacity:0;
+    }
+    50%{
+    opacity:0.5;
+    }
+    100% {
+    opacity:1;
+    }
+   }
 #begin{
     max-width:70%;
     max-height: 600px;
@@ -37,19 +49,21 @@ body{
     border-radius: 10px;
 }
 #bbegin:hover{
-border-color: white;
-background-color: transparent;
-color: white;
+    border-color: white;
+    background-color: transparent;
+    color: white;
 }
 #bbegin:focus{
     border-color: black;
     background-color: transparent;
     color: red;
     }
-
-#mobile {
-    background-color: white;
-    background-image: url("data/perso.png");
+#mobile { 
+    background-image: url("../data/perso.png");
+    background-size: 25px;
+    width:50px;
+    height: 50px;
+    background-repeat: no-repeat;
 }
     
    
