@@ -45,14 +45,15 @@ function dial(text1,text2){
     tz(text1);
         document.addEventListener('keypress', (event) => {
         let code = event.code;
-        if(code=="Enter"){
+        if(code==="Enter"){
             tz(text2)
             instru(2)
         }
-        else if(code=="Space"){
-init()        }   
-    }, false);  
-}
+        else if(code==="Space"){
+            init()        }   
+        else if (code !="Enter" || code!="Space"){
+            dial(text1,text2) }}, false);  
+    }
 
 //permet d'afficher du text informatif
 function alerte(text){
@@ -60,9 +61,10 @@ function alerte(text){
     tz(text);
         document.addEventListener('keypress', (event) => {
         let code = event.code;
-        if(code=="Space"){
+        if(code==="Space"){
             init()
-        }
+        }else if(code!="Space"){
+            alert(text)}
     }, false); 
     
 }
@@ -186,17 +188,19 @@ valeurs = valeurs1
 
 //permet de deposer un cv au endroit definis
 function recup_livre(){
-    if (valeurs[ligne][colonne] == "+"){
+    if (valeurs[ligne][colonne] === "+"){
         instru(0)
         tz("voulez-vous déposer votre CV ici ?")
         document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code=="KeyY"){
+        if(code==="KeyY"){
             livres=livres+1;
             valeurs[ligne][colonne] = '-';
             compteur()
-        }   else{            
+        }   else if(code==="KeyN"){            
             compteur()
+        }else{
+            recup_livre()
         }
     }, false);  
     }
@@ -204,34 +208,34 @@ function recup_livre(){
 
 //permet de recupere des clef au endroit cacher
 function recup_key(){
-    if (valeurs[ligne][colonne] == "#"){
+    if (valeurs[ligne][colonne] === "#"){
         instru(0)
         tz("voulez-vous récupérer cette clefs ?")
         document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code=="KeyY"){
+        if(code==="KeyY"){
             key=key+1;
             valeurs[ligne][colonne] = ' ';
             compteur()
-        }   else{            
+        }   else if(code==="KeyN"){            
             compteur()
-        }
+        }else{recup_key()}
     }, false);  
     }
 }
 
 //permet de franchir la première porte
 function open_door1(){
-    if (valeurs[ligne][colonne] == "_"){
+    if (valeurs[ligne][colonne] === "_"){
         if (key<1){
             tz("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
         }
-        else if (key == 1){
+        else if (key === 1){
             instru(0)
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code=="KeyY"){
+        if(code==="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map2.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs2
@@ -239,9 +243,9 @@ function open_door1(){
             colonne = 10
             stepdor = 1 
             init()
-        }   else{            
+        }   else if(code==="KeyN"){            
             init()
-        }
+        }else(open_door1())
     }, false);  
        
         }
@@ -250,7 +254,7 @@ function open_door1(){
 
 //permet de franchir la seconde map
 function open_door2(){
-    if (valeurs[ligne][colonne] == "~"){
+    if (valeurs[ligne][colonne] === "~"){
         if(key<2 ){
             tz("avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !")
 
@@ -259,7 +263,7 @@ function open_door2(){
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code=="KeyY"){
+        if(code==="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs3
@@ -267,9 +271,9 @@ function open_door2(){
             colonne = 10
             stepdor = 2
             init()
-        }   else{            
+        }   else if(code==="KeyN"){            
             init()
-        }
+        }else{open_door2()}
     }, false);  
        
         }
@@ -278,7 +282,7 @@ function open_door2(){
 
 //permet de franchir la troisieme map
 function open_door3(){
-    if (valeurs[ligne][colonne] == "!"){
+    if (valeurs[ligne][colonne] === "!"){
         if(key<3 ){
             tz("avant de franchir la porte il faut récupérer 3 cléfs cacher dans les maps !")
 
@@ -288,7 +292,7 @@ function open_door3(){
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code=="KeyY"){
+        if(code==="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map4.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs4
@@ -296,9 +300,9 @@ function open_door3(){
             colonne = 10
             stepdor = 3 
             init()
-        }   else{            
+        }   else if(code==="KeyN"){            
             init()
-        }
+        } else{open_door3()}
     }, false);  
        
         }
@@ -307,38 +311,38 @@ function open_door3(){
 //permet de faire parler les PNJ sur les maps un deux et trois
 let parole = 0
 function dialogue(){
-    if (valeurs[ligne][colonne] == "*"){
+    if (valeurs[ligne][colonne] === "*"){
         parole=parole+1
-        if (parole == 1){
+        if (parole === 1){
             dial("Bonjour et bienvenu à hetic ! <br><br> Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...", "Pour décrocher ton stage et etres eventuellement recruter, tu doit déposer ton CV dans 9 boites disponnibles dans les différentes maps...")
-        }else if (parole == 2){
+        }else if (parole === 2){
             instru(0)
             tz("PNJ : A tu besoin d'aide ?")
             document.addEventListener('keypress', (event) => {
                 let code = event.code;
-            if(code=="KeyY"){
+            if(code==="KeyY"){
                 dial(" vous : je cherche l'école HeTiC",'PNJ : elle se trouve en haut du classement.')
-            }   else{            
-                init() }    }, false);  
+            }   else if(code==="KeyN"){            
+                init() } else{dialogue(); parole=parole-1;}   }, false);  
             }
-        else if (parole == 3){
+        else if (parole === 3){
             instru(0)
             tz("Parler à ce PNJ ?")
             document.addEventListener('keypress', (event) => {
                 let code = event.code;
-            if(code=="KeyY"){
+            if(code==="KeyY"){
                 dial(" vous : Bonjour", "PNJ : Je n'ai pas de temps à perdre")
-            }   else{            
-                init() }    }, false);  
+            }   else if(code==="KeyN"){            
+                init() } else{dialogue() ; parole=parole-1;}   }, false);  
             }
     
-        else if (parole == 4){
+        else if (parole === 4){
             if(livres < 3){
                 alerte('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente,<br> tu peut toujours y retourner.')
             }
             else {alerte('Salut, bravo tu à franchi la première étape,<br> à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
         }
-        else if (parole == 5){
+        else if (parole === 5){
             if(livres < 6){
                 alerte('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente,<br> tu peut toujours y retourner.')
             }
@@ -362,8 +366,11 @@ function youn(text,r){
             tz("BRAVO ! bonne réponse")
             stp=stp+1
         }
-        else {
-        tz("DOMMAGE ! mauvaise réponse")       }   
+        else if (code!=r){
+        tz("DOMMAGE ! mauvaise réponse")       } 
+        else if (code!="KeyY" || code!="KeyN"){
+        youn(text,r)
+        }  
     }, false);
 
 }
@@ -377,9 +384,11 @@ function prompte(q,a1,a2,a3,r){
         tz("BRAVO ! Ta réponse est correct.")
         stp=stp+1
         }       
-    else{
+    else if (code!=r){
         tz("Dommage ! Mauvaise réponse.")
-    }    
+    }    else if (code!="KeyA" || code!="KeyB" || code!="KeyC"){
+        prompte(q,a1,a2,a3,r)
+    }
                  
     }, false);  
 }
@@ -387,25 +396,25 @@ function prompte(q,a1,a2,a3,r){
 //permet de parler au personnages de la dernière map
 let perso = 0
 function stepoff(){
-    if (valeurs[ligne][colonne] == "P"){
+    if (valeurs[ligne][colonne] === "P"){
         perso++
-        if (perso == 1){
+        if (perso === 1){
             alerte('Bonjour, je pense que vous rechercher la conseillère. Elle se situe dans la salle du haut')
         }
-        else if (perso == 2){
+        else if (perso === 2){
             if(livres < 9){
                 alerte(' Bonjour, revenez me voir lorsque vous aurez déposé tous vos CV.')
             }
         }
-        else if (perso == 3){
-            if(livres == 9){
+        else if (perso === 3){
+            if(livres === 9){
                 alerte('Félicitation, vous avez déposé tous vos CV et vous avez décroché un entretien. Le directeur de la boîte vous attends dans la salle près de l\'accueil, allez-y sans tarder !  .')
             }
         }
-        else if (perso == 4){
+        else if (perso === 4){
             alerte("Bonjour, j'ai une liste de 10 questions en culture générale si vous répondez correctement à 7 questions vous obtenez votre stage chez nous.")
         }
-        else if (paroles == 5){
+        else if (paroles === 5){
                 prompte("La dernière version de HTML est... ", 'HTMTL5',"HTML6","HTML7","KeyA")
                 prompte("Le ... est un langage informatique incontournable pour la mise en forme des pages sur internet.","CSS","HTML","PHP","KeyA")
                 prompte("Le CMS le plus utilisé est ...", "GIT","WORDPRESS","WIX","KeyB")
@@ -424,7 +433,7 @@ function stepoff(){
 //permet de sortir des salles
 let stepdor = 0
 function exit(stepdor){
-    if (valeurs[ligne][colonne] == "O"){
+    if (valeurs[ligne][colonne] === "O"){
         tz("voulez-vous sortir de cette salle ?")
         instru(0)
             document.addEventListener('keypress', (event) => {
@@ -434,21 +443,21 @@ function exit(stepdor){
         document.getElementById('mapzone').style.animation = "fadein 2s"
         setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
         valeurs=valeurs1
-        if(code=="KeyY"){
-            if (stepdor == 1){
+        if(code==="KeyY"){
+            if (stepdor === 1){
                 ligne = 14
                 colonne = 5
-            }else if (stepdor == 2){
+            }else if (stepdor === 2){
                 ligne = 14
                 colonne = 18
-            }else if (stepdor == 3){
+            }else if (stepdor === 3){
                 ligne = 10
                 colonne = 11
             }   
             init()
-        }   else{            
+        }   else if(code =="KeyN"){            
             init()
-        }
+        }else{exit()}
     }, false);  
     }
 }
@@ -476,7 +485,7 @@ function deplacement(event) {
   
 
     // fleche haut
-    if (touche == "ArrowUp") {
+    if (touche === "ArrowUp") {
         if (valeurs[ligne-1][colonne] != '-' && valeurs[ligne-1][colonne] != '*'){
             if (ligne > 1) {
                 C.style.backgroundImage = "url(data/perso_dos.png)"
@@ -496,7 +505,7 @@ function deplacement(event) {
     }
 
     // fleche bas
-    else if (touche == "ArrowDown") {
+    else if (touche === "ArrowDown") {
         if (valeurs[ligne+1][colonne] != '-'){
             if (ligne < 20) {
                 C.style.backgroundImage = "url(data/perso.png)"
@@ -515,7 +524,7 @@ function deplacement(event) {
         }
     }
         // fleche gauche
-    else if (touche == "ArrowLeft") {
+    else if (touche === "ArrowLeft") {
         if (valeurs[ligne][colonne-1] != '-'){
             if (colonne > 1) {
                 C.style.backgroundImage = "url(data/perso_gauche.png)"
@@ -534,7 +543,7 @@ function deplacement(event) {
         }
     }
         // fleche droite
-    else if (touche == "ArrowRight") {
+    else if (touche === "ArrowRight") {
         if (valeurs[ligne][colonne+1] != '-'){
             if (colonne < 20) {
                 C.style.backgroundImage = "url(data/perso_droite.png)"
