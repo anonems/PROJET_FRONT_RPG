@@ -1,36 +1,86 @@
+//permet d'ecrire dans les zones de text
+function ti(text){
+    document.getElementById("instruzone").innerHTML = text
+}
+function tz(text){
+    document.getElementById("textzone").innerHTML = text
+}
+
+//initialisation de la map de base
 document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
 document.getElementById('mapzone').style.animation = "fadein 2s"
-document.getElementById("textzone").innerHTML = '<img src="data/logo.png" width="150px" >'
-document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
+
+//permet d'initialiser les zones de text zones de textes
 function init(){
-    document.getElementById("textzone").innerHTML = '<img src="data/logo.png" width="150px" >'
-    document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
+    tz('<img src="data/logo.png" width="150px" >')
+    ti('INSTRUCTIONS<br>déplace-toi avec les flèche du clavier<br><br><img style="position:absolute;bottom:5px" src="data/keys.png" width="80px" >')
+
 }
+init()
+
+//on affiche le nombre de clef et cv déposer
 function compteur(){
-    document.getElementById("textzone").innerHTML = ""
-    document.getElementById("instruzone").innerHTML = ""
-    document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
-    document.getElementById("textzone").innerHTML = "cv déposé(s) = "+livres+", clef récupéré(s) = "+key
+
+    ti("INSTRUCTIONS<br>déplace-toi avec les flèche du clavier")
+    tz("cv déposé(s) = "+livres+", clef récupéré(s) = "+key)
 }
+
+//on affiche les instructions dans la zone de text
 function instru(n){
     if(n==0){
-    document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+    ti("INSTRUCTIONS<br>Pour valider clique sur Y,<br>Pour refuser clique sur N ")
     }
     else if(n==1){
-        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+        ti("Pour passer au suivant clique sur Entrée")
     }else if(n==2){
-        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+        ti("Pour continuer clique sur Espace")
     }else if(n==3){
-        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+        ti("INSTRUCTIONS<br>Pour valider cliquez sur Y,Pour refuser cliquez sur N ")
     }
 }
+
+//permet d'afficher des dialogues entre deux personnes
+function dial(text1,text2){
+    instru(1)
+    tz(text1);
+        document.addEventListener('keypress', (event) => {
+        let code = event.code;
+        if(code=="Enter"){
+            tz(text2)
+            instru(2)
+        }
+        else if(code=="Space"){
+init()        }   
+    }, false);  
+}
+
+//permet d'afficher du text informatif
+function alerte(text){
+    instru(2)
+    tz(text);
+        document.addEventListener('keypress', (event) => {
+        let code = event.code;
+        if(code=="Space"){
+            init()
+        }
+    }, false); 
+    
+}
+
+//
 let mobile = document.querySelector("#mobile");
-// Position initiale de mon élément
+// Position vertical
 let ligne = 0;
+// position horizontal
 let colonne = 0;
+// nombre de cv déposer
 let livres = 0;
+//nombre de clef recupere
 let key = 0;
+//grille de déplacement
 let valeurs
+
+//grille map principal
 let valeurs1 = []
     valeurs1 = [
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
@@ -51,9 +101,11 @@ let valeurs1 = []
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' '],
-		['+', '+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		['-', '+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ']
 	]
+
+    //grille map deux
     let valeurs2 = []
     valeurs2 = [
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
@@ -77,6 +129,8 @@ let valeurs1 = []
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'O', 'O', '-', '-', '-', '-', '-', '-', '-', '-', '-']
 	]
+
+    //grille map trois
     let valeurs3 = []
     valeurs3 = [
         ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
@@ -100,6 +154,8 @@ let valeurs1 = []
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'O', 'O', '-', '-', '-', '-', '-', '-', '-', '-', '-']	
     ]
+
+    //grille map quatre
     let valeurs4 = []
     valeurs4=
 [
@@ -124,16 +180,19 @@ let valeurs1 = []
     ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'O', 'O', '-', '-', '-', '-', '-', '-', '-', '-', '-']
 ]
+
+// on defini la grile a utiliser pour commencer
 valeurs = valeurs1
+
+//permet de deposer un cv au endroit definis
 function recup_livre(){
     if (valeurs[ligne][colonne] == "+"){
         instru(0)
-        document.getElementById('textzone').innerHTML = "voulez-vous déposer votre CV ici ?";
+        tz("voulez-vous déposer votre CV ici ?")
         document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            var code = event.code;
+            let code = event.code;
         if(code=="KeyY"){
-            livres++;
+            livres=livres+1;
             valeurs[ligne][colonne] = '-';
             compteur()
         }   else{            
@@ -142,15 +201,16 @@ function recup_livre(){
     }, false);  
     }
 }
+
+//permet de recupere des clef au endroit cacher
 function recup_key(){
     if (valeurs[ligne][colonne] == "#"){
         instru(0)
-        document.getElementById('textzone').innerHTML = "voulez-vous récupérer cette clefs ?";
+        tz("voulez-vous récupérer cette clefs ?")
         document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            var code = event.code;
+            let code = event.code;
         if(code=="KeyY"){
-            key++;
+            key=key+1;
             valeurs[ligne][colonne] = ' ';
             compteur()
         }   else{            
@@ -160,17 +220,17 @@ function recup_key(){
     }
 }
 
+//permet de franchir la première porte
 function open_door1(){
     if (valeurs[ligne][colonne] == "_"){
         if (key<1){
-            document.getElementById('textzone').innerHTML ="avant de franchir la porte il faut récupérer une cléfs cacher dans la map !"
+            tz("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
         }
         else if (key == 1){
             instru(0)
-            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            var code = event.code;
+            let code = event.code;
         if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map2.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
@@ -187,17 +247,18 @@ function open_door1(){
         }
     }
 }
+
+//permet de franchir la seconde map
 function open_door2(){
     if (valeurs[ligne][colonne] == "~"){
         if(key<2 ){
-            document.getElementById('textzone').innerHTML = "avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !"
+            tz("avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !")
 
         }else{
             instru(0)
-            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            var code = event.code;
+            let code = event.code;
         if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
@@ -214,18 +275,19 @@ function open_door2(){
         }
     }
 }
+
+//permet de franchir la troisieme map
 function open_door3(){
     if (valeurs[ligne][colonne] == "!"){
         if(key<3 ){
-            document.getElementById('textzone').innerHTML = "avant de franchir la porte il faut récupérer 3 cléfs cacher dans les maps !"
+            tz("avant de franchir la porte il faut récupérer 3 cléfs cacher dans les maps !")
 
         }
         else{
             instru(0)
-            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            var code = event.code;
+            let code = event.code;
         if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map4.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
@@ -242,85 +304,132 @@ function open_door3(){
         }
     }
 }
+//permet de faire parler les PNJ sur les maps un deux et trois
 let parole = 0
 function dialogue(){
     if (valeurs[ligne][colonne] == "*"){
-        parole++
+        parole=parole+1
         if (parole == 1){
-            // zt("Bonjour et bienvenu à hetic !")
-            // zt("Pour décrocher ton stage  et etres eventuellement recruter, tu doit déposer ton CV dans 9 boites disponnibles dans les différentes maps...")
-            // zt("Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...")
+            dial("Bonjour et bienvenu à hetic ! <br><br> Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...", "Pour décrocher ton stage et etres eventuellement recruter, tu doit déposer ton CV dans 9 boites disponnibles dans les différentes maps...")
         }else if (parole == 2){
-            if(prompt('Bonjour, avez vous besoin d\'aide?') == 'oui'){
-                prompt(" je cherche la société ", "HeTiC")
-                alert('elle se trouve en haut du classement.')
+            instru(0)
+            tz("PNJ : A tu besoin d'aide ?")
+            document.addEventListener('keypress', (event) => {
+                let code = event.code;
+            if(code=="KeyY"){
+                dial(" vous : je cherche l'école HeTiC",'PNJ : elle se trouve en haut du classement.')
+            }   else{            
+                init() }    }, false);  
             }
-        }else if (parole == 3){
-            prompt('parlez a ce personnage')
-            alert('je n\'ai pas de temps à perdre')
-        }
+        else if (parole == 3){
+            instru(0)
+            tz("Parler à ce PNJ ?")
+            document.addEventListener('keypress', (event) => {
+                let code = event.code;
+            if(code=="KeyY"){
+                dial(" vous : Bonjour", "PNJ : Je n'ai pas de temps à perdre")
+            }   else{            
+                init() }    }, false);  
+            }
+    
         else if (parole == 4){
             if(livres < 3){
-                alert('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente, tu peut toujours y retourner.')
+                alerte('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente,<br> tu peut toujours y retourner.')
             }
-            else {alert('Salut, bravo tu à franchi la première étape, à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
+            else {alerte('Salut, bravo tu à franchi la première étape,<br> à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
         }
         else if (parole == 5){
             if(livres < 6){
-                alert('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente, tu peut toujours y retourner.')
+                alerte('Attention je vois que tu n\'a pas déposer assez de CV dans la map précédente,<br> tu peut toujours y retourner.')
             }
-            else {alert('Salut, bravo tu à franchi la deuxième étape, à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
+            else {alerte('Salut, bravo tu à franchi la deuxième étape,<br> à toi d\'augmenter tes chances en postulant d\'avantage ici, good luck')}
         }
         valeurs[ligne][colonne] = '-'         
         
     }
 }
+
+//var de decompatage des point derniere map
+let stp = 0
+
+//permet de poser de question et repondre par oui ou non
+function youn(text,r){
+    instru(0)
+    tz(text);
+        document.addEventListener('keypress', (event) => {
+        let code = event.code;
+        if(code==r){
+            tz("BRAVO ! bonne réponse")
+            stp=stp+1
+        }
+        else {
+        tz("DOMMAGE ! mauvaise réponse")       }   
+    }, false);
+
+}
+//permet de faire un QCM
+function prompte(q,a1,a2,a3,r){
+    document.addEventListener('keypress', (event) => {
+        let code = event.code;
+        tz(q)
+        ti("A)"+a1+"<br> B)"+a2+"<br> C)"+a3)
+    if(code==r){
+        tz("BRAVO ! Ta réponse est correct.")
+        stp=stp+1
+        }       
+    else{
+        tz("Dommage ! Mauvaise réponse.")
+    }    
+                 
+    }, false);  
+}
+
+//permet de parler au personnages de la dernière map
 let perso = 0
 function stepoff(){
     if (valeurs[ligne][colonne] == "P"){
         perso++
         if (perso == 1){
-            alert('Bonjour, je pense que vous rechercher la conseillère. Elle se situe dans la salle du haut')
+            alerte('Bonjour, je pense que vous rechercher la conseillère. Elle se situe dans la salle du haut')
         }
         else if (perso == 2){
             if(livres < 9){
-                alert(' Bonjour, revenez me voir lorsque vous aurez déposé tous vos CV.')
+                alerte(' Bonjour, revenez me voir lorsque vous aurez déposé tous vos CV.')
             }
         }
         else if (perso == 3){
             if(livres == 9){
-                alert('Félicitation, vous avez déposé tous vos CV et vous avez décroché un entretien. Le directeur de la boîte vous attends dans la salle près de l\'accueil, allez-y sans tarder !  .')
+                alerte('Félicitation, vous avez déposé tous vos CV et vous avez décroché un entretien. Le directeur de la boîte vous attends dans la salle près de l\'accueil, allez-y sans tarder !  .')
             }
         }
         else if (perso == 4){
-            alert("Bonjour, j'ai une liste de 10 questions en culture générale si vous répondez correctement à 7 questions vous obtenez votre stage chez nous.")
+            alerte("Bonjour, j'ai une liste de 10 questions en culture générale si vous répondez correctement à 7 questions vous obtenez votre stage chez nous.")
         }
         else if (paroles == 5){
-            if(prompt("La dernière version de HTML est... ") == 'HTMTL5'){
-                prompt("Le ... est un langage informatique incontournable pour la mise en forme des pages sur internet.","CSS")
-                prompt("Le CMS le plus utilisé est ...", "wordPress")
-                prompt("La signification de HTML est...", " HyperTextLanguage Markup ?")
-                prompt("VRAI ou FAUX - Les balises <HTML> et </HTML> sont placés dans le corps <BODY> d'un document HTML","faux")
-                prompt("La balise <...> te permettra de mettre en gras un mot ?","em")
-                prompt(" Dans la norme HTML, il existe ... niveaux de titres.","6")
-                prompt("La balise <...> est utilisé pour faire un changement de ligne?","br")
-                prompt("Dans les niveaux de titre, <...> donnent la plus petite taille.","H6")
-                prompt("HTML est considéré comme un language de ...","balisage")
-
-            }
+                prompte("La dernière version de HTML est... ", 'HTMTL5',"HTML6","HTML7","KeyA")
+                prompte("Le ... est un langage informatique incontournable pour la mise en forme des pages sur internet.","CSS","HTML","PHP","KeyA")
+                prompte("Le CMS le plus utilisé est ...", "GIT","WORDPRESS","WIX","KeyB")
+                prompte("La signification de HTML est...", "HyperTextLourdMass", " HyperTextLanguage Markup","aucun","KeyB")
+                youn("Les balises <HTML> et </HTML> sont placés dans le corps <BODY> d'un document HTML","KeyN")
+                prompte("La balise <...> te permettra de mettre en gras un mot ?","u","b","j","KeyB")
+                prompte(" Dans la norme HTML, il existe ... niveaux de titres.","6","9","4","KeyA")
+                prompte("La balise <...> est utilisé pour faire un changement de ligne?","lr","hr","br","KeyC")
+                prompte("HTML est considéré comme un language de ...","Develeppeur Back","balisage","soulignage","KeyB")
+            
         }
         valeurs[ligne][colonne] = '-'         
     }
 }
+
+//permet de sortir des salles
 let stepdor = 0
 function exit(stepdor){
     if (valeurs[ligne][colonne] == "O"){
-        document.getElementById('textzone').innerHTML = "voulez-vous sortir de cette salle ?";
+        tz("voulez-vous sortir de cette salle ?")
         instru(0)
-            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
             document.addEventListener('keypress', (event) => {
             var name = event.key;
-            var code = event.code;
+            let code = event.code;
             document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
         document.getElementById('mapzone').style.animation = "fadein 2s"
         setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
@@ -344,6 +453,7 @@ function exit(stepdor){
     }
 }
 
+//
 mobile.style.gridColumn = colonne;
 mobile.style.gridRow = ligne;
 

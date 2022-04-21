@@ -4,6 +4,9 @@ body{
     font-family: 'MedievalSharp', cursive;
 }
 .textzone{
+    display: flex;
+    align-items:center;
+    justify-content:center;
     top:auto;
     width : 500px;
     height: 150px;
@@ -15,8 +18,12 @@ body{
     left: 50%;
     transform: translate(-50%, -0%);
     vertical-align: middle;
+    font-weight: bold;
 }
 .instruzone{
+    display: flex;
+    align-items:center;
+    justify-content:center;
     width : 500px;
     height: 150px;
     background-color: #BFC3C5;
@@ -28,6 +35,8 @@ body{
     position: absolute;
     transform: translate(-50%, -0%);
     vertical-align: middle;
+    font-weight: bold;
+
 }
 .mapzone{
     background-color: #BFC3C5;
