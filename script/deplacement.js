@@ -1,18 +1,42 @@
 document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
-
+document.getElementById('mapzone').style.animation = "fadein 2s"
+document.getElementById("textzone").innerHTML = '<img src="data/logo.png" width="150px" >'
+document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
+function init(){
+    document.getElementById("textzone").innerHTML = '<img src="data/logo.png" width="150px" >'
+    document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
+}
+function compteur(){
+    document.getElementById("textzone").innerHTML = ""
+    document.getElementById("instruzone").innerHTML = ""
+    document.getElementById("instruzone").innerHTML = "INSTRUCTIONS<br>déplace-toi avec les flèche du clavier"
+    document.getElementById("textzone").innerHTML = "cv déposé(s) = "+livres+", clef récupéré(s) = "+key
+}
+function instru(n){
+    if(n==0){
+    document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+    }
+    else if(n==1){
+        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+    }else if(n==2){
+        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+    }else if(n==3){
+        document.getElementById("instruzone").innerHTML = "Pour valider cliquez sur Y,Pour refuser cliquez sur N  "
+    }
+}
 let mobile = document.querySelector("#mobile");
 // Position initiale de mon élément
 let ligne = 0;
 let colonne = 0;
-let livres = 0
-let key = 0
+let livres = 0;
+let key = 0;
 let valeurs
 let valeurs1 = []
     valeurs1 = [
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
-		['*', ' ', '#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
+		['*', '*', '#', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', '+'],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' '],
@@ -27,7 +51,7 @@ let valeurs1 = []
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' '],
-		['+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+		['+', '+', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
 		[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ']
 	]
     let valeurs2 = []
@@ -103,69 +127,118 @@ let valeurs1 = []
 valeurs = valeurs1
 function recup_livre(){
     if (valeurs[ligne][colonne] == "+"){
-        if( window.confirm("voulez-vous déposer votre CV ici ?") ){
-            livres++
-            valeurs[ligne][colonne] = '-'
+        instru(0)
+        document.getElementById('textzone').innerHTML = "voulez-vous déposer votre CV ici ?";
+        document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+        if(code=="KeyY"){
+            livres++;
+            valeurs[ligne][colonne] = '-';
+            compteur()
+        }   else{            
+            compteur()
         }
+    }, false);  
     }
 }
 function recup_key(){
     if (valeurs[ligne][colonne] == "#"){
-        if( window.confirm("voulez-vous récupérer cette clefs ?") ){
-            key++
-            valeurs[ligne][colonne] = ' '
+        instru(0)
+        document.getElementById('textzone').innerHTML = "voulez-vous récupérer cette clefs ?";
+        document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+        if(code=="KeyY"){
+            key++;
+            valeurs[ligne][colonne] = ' ';
+            compteur()
+        }   else{            
+            compteur()
         }
+    }, false);  
     }
 }
 
 function open_door1(){
     if (valeurs[ligne][colonne] == "_"){
         if (key<1){
-            alert("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
+            document.getElementById('textzone').innerHTML ="avant de franchir la porte il faut récupérer une cléfs cacher dans la map !"
         }
-        else if( window.confirm("voulez-vous entrer ?") ){
+        else if (key == 1){
+            instru(0)
+            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+        if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map2.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs2
             ligne = 18
             colonne = 10
-            stepdor = 1        
+            stepdor = 1 
+            init()
+        }   else{            
+            init()
+        }
+    }, false);  
+       
         }
     }
 }
 function open_door2(){
     if (valeurs[ligne][colonne] == "~"){
-        if (key == 2){
-            if(window.confirm("voulez-vous entrer ?") ){
+        if(key<2 ){
+            document.getElementById('textzone').innerHTML = "avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !"
+
+        }else{
+            instru(0)
+            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+        if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
-            valeurs=valeurs3 
+            valeurs=valeurs3
             ligne = 18
             colonne = 10
-            stepdor = 2        
-            }
+            stepdor = 2
+            init()
+        }   else{            
+            init()
         }
-        else if(key<2 ){
-            alert("avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !")
-
+    }, false);  
+       
         }
     }
 }
 function open_door3(){
     if (valeurs[ligne][colonne] == "!"){
-        if (key == 3 ){
-            if(window.confirm("voulez-vous entrer ?")){
+        if(key<3 ){
+            document.getElementById('textzone').innerHTML = "avant de franchir la porte il faut récupérer 3 cléfs cacher dans les maps !"
+
+        }
+        else{
+            instru(0)
+            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+        if(code=="KeyY"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/map4.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs4
             ligne = 18
             colonne = 10
-            stepdor = 3    
-            }
+            stepdor = 3 
+            init()
+        }   else{            
+            init()
         }
-        else if(key<3 ){
-            alert("avant de franchir la porte il faut récupérer 3 cléfs cacher dans les maps !")
-
+    }, false);  
+       
         }
     }
 }
@@ -174,9 +247,9 @@ function dialogue(){
     if (valeurs[ligne][colonne] == "*"){
         parole++
         if (parole == 1){
-            alert('Bonjour et bienvenu à hetic !')
-            alert('Pour décrocher ton stage  et etres eventuellement recruter, tu doit déposer ton CV dans 9 boites disponnibles dans les différentes maps...')
-            alert('Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...')
+            // zt("Bonjour et bienvenu à hetic !")
+            // zt("Pour décrocher ton stage  et etres eventuellement recruter, tu doit déposer ton CV dans 9 boites disponnibles dans les différentes maps...")
+            // zt("Pour accéder aux salles secondaires il te faut récupérer 3 clés que tu trouvera à différents endroit...")
         }else if (parole == 2){
             if(prompt('Bonjour, avez vous besoin d\'aide?') == 'oui'){
                 prompt(" je cherche la société ", "HeTiC")
@@ -242,10 +315,17 @@ function stepoff(){
 let stepdor = 0
 function exit(stepdor){
     if (valeurs[ligne][colonne] == "O"){
-        document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
+        document.getElementById('textzone').innerHTML = "voulez-vous sortir de cette salle ?";
+        instru(0)
+            document.getElementById('textzone').innerHTML = "voulez-vous entrer dans cette salle ?";
+            document.addEventListener('keypress', (event) => {
+            var name = event.key;
+            var code = event.code;
+            document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
         document.getElementById('mapzone').style.animation = "fadein 2s"
+        setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
         valeurs=valeurs1
-        if( window.confirm("voulez-vous sortir de la salle ?")){
+        if(code=="KeyY"){
             if (stepdor == 1){
                 ligne = 14
                 colonne = 5
@@ -255,8 +335,12 @@ function exit(stepdor){
             }else if (stepdor == 3){
                 ligne = 10
                 colonne = 11
-            }            
+            }   
+            init()
+        }   else{            
+            init()
         }
+    }, false);  
     }
 }
 
@@ -278,6 +362,8 @@ function deplacement(event) {
  	C.style.position = 'absolute';
  	C.style.left = 0;
  	C.style.top = 0;
+
+  
 
     // fleche haut
     if (touche == "ArrowUp") {
@@ -364,7 +450,8 @@ function deplacement(event) {
         mobile.style.gridColumn = colonne;
         mobile.style.gridRow = ligne;
 }
-
+    
 // L'évènement sur le document
 document.onkeyup = deplacement;
+
 

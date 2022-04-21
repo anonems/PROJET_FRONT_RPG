@@ -3,6 +3,32 @@ body{
     background-color: #363636;
     font-family: 'MedievalSharp', cursive;
 }
+.textzone{
+    top:auto;
+    width : 500px;
+    height: 150px;
+    background-color: #BFC3C5;
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -0%);
+    vertical-align: middle;
+}
+.instruzone{
+    width : 500px;
+    height: 150px;
+    background-color: #BFC3C5;
+    border-radius: 15px;
+    text-align: center;
+    overflow: hidden;
+    left: 50%;
+    bottom : 10px;
+    position: absolute;
+    transform: translate(-50%, -0%);
+    vertical-align: middle;
+}
 .mapzone{
     background-color: #BFC3C5;
     background-size: 500px 500px;
