@@ -14,15 +14,14 @@ document.getElementById('mapzone').style.animation = "fadein 2s"
 function init(){
     tz('<img src="data/logo.png" width="150px" >')
     ti('INSTRUCTIONS<br>déplace-toi avec les flèche du clavier<br><br><img style="position:absolute;bottom:5px" src="data/keys.png" width="80px" >')
-
 }
 init()
 
 //on affiche le nombre de clef et cv déposer
 function compteur(){
-
-    ti("INSTRUCTIONS<br>déplace-toi avec les flèche du clavier")
-    tz("cv déposé(s) = "+livres+", clef récupéré(s) = "+key)
+    init()
+    // ti("INSTRUCTIONS<br>déplace-toi avec les flèche du clavier")
+    // tz("cv déposé(s) = "+livres+", clef récupéré(s) = "+key)
 }
 
 //on affiche les instructions dans la zone de text
@@ -51,7 +50,7 @@ function dial(text1,text2){
         }
         else if(code==="Space"){
             init()        }   
-        else if (code !="Enter" || code!="Space"){
+        else{
             dial(text1,text2) }}, false);  
     }
 
@@ -63,7 +62,7 @@ function alerte(text){
         let code = event.code;
         if(code==="Space"){
             init()
-        }else if(code!="Space"){
+        }else{
             alert(text)}
     }, false); 
     
@@ -457,7 +456,7 @@ function exit(stepdor){
             init()
         }   else if(code =="KeyN"){            
             init()
-        }else{exit()}
+        }else{exit(stepdor)}
     }, false);  
     }
 }
