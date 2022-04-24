@@ -54,7 +54,6 @@ body{
     grid-template-columns: repeat(20, 25px);
     grid-template-rows: repeat(20, 25px);
     background-repeat: no-repeat;
-    /* animation: fadein 2s;  */
 }
    @keyframes fadein {
     0% {

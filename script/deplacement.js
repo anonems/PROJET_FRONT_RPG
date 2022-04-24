@@ -8,12 +8,12 @@ function tz(text){
 
 //initialisation de la map de base
 document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
-document.getElementById('mapzone').style.animation = "fadein 2s"
+//document.getElementById('mapzone').style.animation = "fadein 2s"
 
 //permet d'initialiser les zones de text zones de textes
 function init(){
     tz('<img src="data/logo.png" width="150px" >')
-    ti('INSTRUCTIONS<br>déplace-toi avec les flèche du clavier<br><br><img style="position:absolute;bottom:5px" src="data/keys.png" width="80px" >')
+    ti('INSTRUCTIONS<br>déplace-toi avec les flèches du clavier<br><br><img style="position:absolute;bottom:5px" src="data/keys.png" width="80px" >')
 }
 init()
 
@@ -40,30 +40,29 @@ function instru(n){
 
 //permet d'afficher des dialogues entre deux personnes
 function dial(text1,text2){
-    instru(1)
+    ti("Pour passer au suivant clique sur G")
     tz(text1);
         document.addEventListener('keypress', (event) => {
         let code = event.code;
-        if(code==="Enter"){
+        if(code==="KeyG"){
             tz(text2)
-            instru(2)
+            ti("Pour continuer clique sur B")
         }
-        else if(code==="Space"){
+        else if(code==="KeyB"){
             init()        }   
-        else{
-            dial(text1,text2) }}, false);  
+       }, false);  
     }
 
 //permet d'afficher du text informatif
 function alerte(text){
-    instru(2)
+    ti("Pour continuer clique sur T")
     tz(text);
         document.addEventListener('keypress', (event) => {
         let code = event.code;
-        if(code==="Space"){
+        if(code==="KeyT"){
             init()
-        }else{
-            alert(text)}
+            return true
+        }else{return false}
     }, false); 
     
 }
@@ -110,7 +109,7 @@ let valeurs1 = []
     let valeurs2 = []
     valeurs2 = [
 		['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-		['-', '-', '-', '*', '-', ' ', ' ', ' ', '-', '+', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', '-'],
+		['-', '-', '-', '*', '*', ' ', ' ', ' ', '-', '+', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
 		['-', '-', '-', '-', '-', ' ', '-', '-', '-', ' ', '-', '-', '-', '-', '-', ' ', ' ', '-', '-', '-', '-'],
@@ -161,13 +160,13 @@ let valeurs1 = []
     valeurs4=
 [
     ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-'],
-    ['-', '-', '-', ' ', ' ', ' ', 'P', ' ', ' ', '-', '-', '-', '-', ' ', ' ', ' ', ' ', '-', '-', '-', '-'],
-    ['-', '-', ' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', '-', ' ', 'P', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-'],
+    ['-', '-', '-', ' ', ' ', ' ', 'P4', ' ', ' ', '-', '-', '-', '-', ' ', ' ', ' ', ' ', '-', '-', '-', '-'],
+    ['-', '-', ' ', ' ', ' ', '-', '-', '-', ' ', ' ', ' ', '-', ' ', 'P3', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
+    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-', '-', '-', '-', '-'],
     ['-', '-', '-', '-', '-', '-', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-'],
+    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-', '-', '-', '-', '-'],
     ['-', '-', '-', '-', '-', '-', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', ' ', '-', '-', '-', '-'],
+    ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-', '-', '-', '-', '-'],
     ['-', '-', '-', '-', '-', '-', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', '-', '-', '-', '-', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', '-'],
@@ -175,8 +174,8 @@ let valeurs1 = []
     ['-', '-', '-', '-', '-', '-', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-'],
-    ['-', '-', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' ', '-', '-', ' ', 'P', '-', ' ', '-'],
-    ['-', '-', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', 'P', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-'],
+    ['-', '-', ' ', '-', '-', '-', '-', '-', '-', '-', '-', '-', ' ', ' ', '-', '-', ' ', 'P2', '-', ' ', '-'],
+    ['-', '-', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', 'P1', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-'],
     ['-', '-', ' ', ' ', ' ', '-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', '-', '-', ' ', '-'],
     ['-', '-', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '-', ' ', ' ', ' ', ' ', '-'],
     ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-', 'O', 'O', '-', '-', '-', '-', '-', '-', '-', '-', '-']
@@ -188,18 +187,16 @@ valeurs = valeurs1
 //permet de deposer un cv au endroit definis
 function recup_livre(){
     if (valeurs[ligne][colonne] === "+"){
-        instru(0)
+        ti("INSTRUCTIONS<br>Pour valider clique sur C,<br>Pour refuser clique sur N ")
         tz("voulez-vous déposer votre CV ici ?")
         document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code==="KeyY"){
+        if(code==="KeyC"){
             livres=livres+1;
             valeurs[ligne][colonne] = '-';
             compteur()
         }   else if(code==="KeyN"){            
             compteur()
-        }else{
-            recup_livre()
         }
     }, false);  
     }
@@ -208,17 +205,17 @@ function recup_livre(){
 //permet de recupere des clef au endroit cacher
 function recup_key(){
     if (valeurs[ligne][colonne] === "#"){
-        instru(0)
+        ti("INSTRUCTIONS<br>Pour valider clique sur K,<br>Pour refuser clique sur N ")
         tz("voulez-vous récupérer cette clefs ?")
         document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code==="KeyY"){
+        if(code==="KeyK"){
             key=key+1;
             valeurs[ligne][colonne] = ' ';
             compteur()
         }   else if(code==="KeyN"){            
             compteur()
-        }else{recup_key()}
+        }
     }, false);  
     }
 }
@@ -230,13 +227,15 @@ function open_door1(){
             tz("avant de franchir la porte il faut récupérer une cléfs cacher dans la map !")
         }
         else if (key === 1){
-            instru(0)
+            ti("INSTRUCTIONS<br>Pour valider clique sur E,<br>Pour refuser clique sur N ")
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code==="KeyY"){
+        if(code==="KeyE"){
+            setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
             document.getElementById('mapzone').style.backgroundImage = "url('data/map2.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
+            alerte('Bonjour, je pense que vous rechercher la conseillère. Elle se situe dans la salle du haut')
             valeurs=valeurs2
             ligne = 18
             colonne = 10
@@ -244,7 +243,7 @@ function open_door1(){
             init()
         }   else if(code==="KeyN"){            
             init()
-        }else(open_door1())
+        }
     }, false);  
        
         }
@@ -258,11 +257,12 @@ function open_door2(){
             tz("avant de franchir la porte il faut récupérer 2 cléfs cacher dans les maps !")
 
         }else{
-            instru(0)
+            ti("INSTRUCTIONS<br>Pour valider clique sur F,<br>Pour refuser clique sur N ")
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code==="KeyY"){
+        if(code==="KeyF"){
+            setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
             document.getElementById('mapzone').style.backgroundImage = "url('data/map3.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs3
@@ -272,7 +272,7 @@ function open_door2(){
             init()
         }   else if(code==="KeyN"){            
             init()
-        }else{open_door2()}
+        }
     }, false);  
        
         }
@@ -287,11 +287,12 @@ function open_door3(){
 
         }
         else{
-            instru(0)
+            ti("INSTRUCTIONS<br>Pour valider clique sur J,<br>Pour refuser clique sur N ")
             tz("voulez-vous entrer dans cette salle ?")
             document.addEventListener('keypress', (event) => {
             let code = event.code;
-        if(code==="KeyY"){
+        if(code==="KeyJ"){
+            setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
             document.getElementById('mapzone').style.backgroundImage = "url('data/map4.png')"
             document.getElementById('mapzone').style.animation = "fadein 2s"
             valeurs=valeurs4
@@ -301,7 +302,7 @@ function open_door3(){
             init()
         }   else if(code==="KeyN"){            
             init()
-        } else{open_door3()}
+        } 
     }, false);  
        
         }
@@ -322,17 +323,17 @@ function dialogue(){
             if(code==="KeyY"){
                 dial(" vous : je cherche l'école HeTiC",'PNJ : elle se trouve en haut du classement.')
             }   else if(code==="KeyN"){            
-                init() } else{dialogue(); parole=parole-1;}   }, false);  
+                init() }    }, false);  
             }
         else if (parole === 3){
-            instru(0)
+            ti("INSTRUCTIONS<br>Pour valider clique sur P,<br>Pour refuser clique sur N ")
             tz("Parler à ce PNJ ?")
             document.addEventListener('keypress', (event) => {
                 let code = event.code;
-            if(code==="KeyY"){
+            if(code==="KeyP"){
                 dial(" vous : Bonjour", "PNJ : Je n'ai pas de temps à perdre")
             }   else if(code==="KeyN"){            
-                init() } else{dialogue() ; parole=parole-1;}   }, false);  
+                init() }    }, false);  
             }
     
         else if (parole === 4){
@@ -354,10 +355,10 @@ function dialogue(){
 
 //var de decompatage des point derniere map
 let stp = 0
-
+let cd = 1
 //permet de poser de question et repondre par oui ou non
 function youn(text,r){
-    instru(0)
+    ti("INSTRUCTIONS<br>Pour valider clique sur V,<br>Pour refuser clique sur X <br> et D pour suivant")
     tz(text);
         document.addEventListener('keypress', (event) => {
         let code = event.code;
@@ -365,100 +366,142 @@ function youn(text,r){
             tz("BRAVO ! bonne réponse")
             stp=stp+1
         }
-        else if (code!=r){
-        tz("DOMMAGE ! mauvaise réponse")       } 
-        else if (code!="KeyY" || code!="KeyN"){
-        youn(text,r)
-        }  
-    }, false);
+        
+     } , false);
 
 }
 //permet de faire un QCM
 function prompte(q,a1,a2,a3,r){
+    let rv 
+    tz(q)
+    ti("R) "+a1+"<br> U) "+a2+"<br> I) "+a3+"<br>D) Suivant")
     document.addEventListener('keypress', (event) => {
         let code = event.code;
-        tz(q)
-        ti("A)"+a1+"<br> B)"+a2+"<br> C)"+a3)
     if(code==r){
         tz("BRAVO ! Ta réponse est correct.")
         stp=stp+1
         }       
-    else if (code!=r){
-        tz("Dommage ! Mauvaise réponse.")
-    }    else if (code!="KeyA" || code!="KeyB" || code!="KeyC"){
-        prompte(q,a1,a2,a3,r)
-    }
-                 
+               
+
     }, false);  
-}
+
+    }
+
+    //fin du jeu
+    function fin_jeu(){
+        if (!(stp>=9 && livres>=9)){
+            setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
+            document.getElementById('mapzone').style.backgroundImage = "url('https://tenor.com/view/game-over-gif-18144118.gif')"
+            document.getElementById('mapzone').style.animation = "fadein 2s"
+            document.getElementById('mobile').style.backgroundImage = "none"
+            document.getElementById('mobile').style.backgroundColor = "transparent"
+            tz('dommage t\'a candidature n\'a pas été rettenu')
+            ti('Appui sur F5')
+        }else{
+            setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
+            document.getElementById('mapzone').style.backgroundImage = "url('data/win.gif')"
+            document.getElementById('mapzone').style.animation = "fadein 2s"
+            tz('Bravo ! tu à réussi.')
+            ti('<img src="data/logo.png" width="150px" >')
+            document.getElementById('mobile').style.backgroundImage = "none"
+            document.getElementById('mobile').style.backgroundColor = "transparent"
+
+
+
+        }
+    }
 
 //permet de parler au personnages de la dernière map
-let perso = 0
 function stepoff(){
-    if (valeurs[ligne][colonne] === "P"){
-        perso++
-        if (perso === 1){
+        if (valeurs[ligne][colonne] === "P1"){
             alerte('Bonjour, je pense que vous rechercher la conseillère. Elle se situe dans la salle du haut')
         }
-        else if (perso === 2){
-            if(livres < 9){
+        else if (valeurs[ligne][colonne] === "P2" && livres < 9){
                 alerte(' Bonjour, revenez me voir lorsque vous aurez déposé tous vos CV.')
-            }
         }
-        else if (perso === 3){
-            if(livres === 9){
+        else if (valeurs[ligne][colonne] === "P3" && livres === 9){
                 alerte('Félicitation, vous avez déposé tous vos CV et vous avez décroché un entretien. Le directeur de la boîte vous attends dans la salle près de l\'accueil, allez-y sans tarder !  .')
+        }
+        else if (valeurs[ligne][colonne] === "P4"){
+            tz("Bonjour, j'ai une liste de 10 questions en culture générale si vous répondez correctement à 7 questions vous obtenez votre stage chez nous.")
+            ti("appui sur D pour débuter.") 
+            document.addEventListener('keypress', (event) => {
+                let code = event.code;
+                 
+                stp=stp+1
+                                   
+                    if(code==="KeyD" && cd===1){
+                        cd=cd+1
+                        prompte("La dernière version de HTML est... ", 'HTMTL5',"HTML6","HTML7","KeyU")
+                    }else if(code==="KeyD" && cd===2){
+                        cd=cd+1    
+                        prompte("Le ... est un langage informatique incontournable pour la mise en forme des pages sur internet.","CSS","HTML","PHP","KeyU")
+                    }else if(code==="KeyD" && cd===3){
+                        cd=cd+1       
+                        prompte("Le CMS le plus utilisé est ...", "GIT","WORDPRESS","WIX","KeyB")
+                    }else if(code==="KeyD" && cd===4){
+                        cd=cd+1           
+                        prompte("La signification de HTML est...", "HyperTextLourdMass", " HyperTextLanguage Markup","aucun","KeyU")
+                    }else if(code==="KeyD" && cd===5){
+                        cd=cd+1              
+                        youn("Les balises <HTML> et </HTML> sont placés dans le corps <BODY> d'un document HTML","KeyX")
+                    }else if(code==="KeyD" && cd===6){
+                        cd=cd+1                   
+                        prompte("La balise <...> te permettra de mettre en gras un mot ?","u","b","j","KeyU")
+                    }else if(code==="KeyD" && cd===7){
+                        cd=cd+1                      
+                        prompte(" Dans la norme HTML, il existe ... niveaux de titres.","6","9","4","KeyU")
+                    }else if(code==="KeyD" && cd===8){
+                        cd=cd+1       
+                        prompte("La balise <...> est utilisé pour faire un changement de ligne?","lr","hr","br","KeyI")
+                    }else if(code==="KeyD" && cd===9){
+                        cd=cd+1       
+                        prompte("HTML est considéré comme un language de ...","Develeppeur Back","balisage","soulignage","KeyU")
+                    }else if(code==="KeyD" && cd===10){
+                        alerte("Bravo, tu répondu à toute les questions.")
+                        fin_jeu()
+        }
+                }, false);
             }
-        }
-        else if (perso === 4){
-            alerte("Bonjour, j'ai une liste de 10 questions en culture générale si vous répondez correctement à 7 questions vous obtenez votre stage chez nous.")
-        }
-        else if (paroles === 5){
-                prompte("La dernière version de HTML est... ", 'HTMTL5',"HTML6","HTML7","KeyA")
-                prompte("Le ... est un langage informatique incontournable pour la mise en forme des pages sur internet.","CSS","HTML","PHP","KeyA")
-                prompte("Le CMS le plus utilisé est ...", "GIT","WORDPRESS","WIX","KeyB")
-                prompte("La signification de HTML est...", "HyperTextLourdMass", " HyperTextLanguage Markup","aucun","KeyB")
-                youn("Les balises <HTML> et </HTML> sont placés dans le corps <BODY> d'un document HTML","KeyN")
-                prompte("La balise <...> te permettra de mettre en gras un mot ?","u","b","j","KeyB")
-                prompte(" Dans la norme HTML, il existe ... niveaux de titres.","6","9","4","KeyA")
-                prompte("La balise <...> est utilisé pour faire un changement de ligne?","lr","hr","br","KeyC")
-                prompte("HTML est considéré comme un language de ...","Develeppeur Back","balisage","soulignage","KeyB")
+                                        
+                                    
+                                
+                            
+                        
+                    
+                
             
-        }
-        valeurs[ligne][colonne] = '-'         
-    }
+        
+    
 }
 
 //permet de sortir des salles
 let stepdor = 0
 function exit(stepdor){
-    if (valeurs[ligne][colonne] === "O"){
-        tz("voulez-vous sortir de cette salle ?")
-        instru(0)
-            document.addEventListener('keypress', (event) => {
-            var name = event.key;
-            let code = event.code;
+     if (valeurs[ligne][colonne] === "O"){
+         tz("voulez-vous sortir de cette salle ?")
+         ti("INSTRUCTIONS<br>Pour valider clique sur S,<br>Pour refuser clique sur N ")
+         document.addEventListener('keypress', (event) => {
+         let code = event.code;
+         if(code==="KeyS"){
             document.getElementById('mapzone').style.backgroundImage = "url('data/main-map.png')"
-        document.getElementById('mapzone').style.animation = "fadein 2s"
-        setTimeout(() => {document.getElementById('mapzone').style.animation = ""}, 2000)
-        valeurs=valeurs1
-        if(code==="KeyY"){
-            if (stepdor === 1){
-                ligne = 14
-                colonne = 5
-            }else if (stepdor === 2){
-                ligne = 14
-                colonne = 18
-            }else if (stepdor === 3){
-                ligne = 10
+            valeurs=valeurs1
+             if (stepdor === 1){
+                 ligne = 14
+                 colonne = 5
+             }else if (stepdor === 2){
+                 ligne = 14
+                 colonne = 18
+             }else if (stepdor === 3){
+                 ligne = 10
                 colonne = 11
-            }   
+             }   
+             init()
+         }   else if(code =="KeyN"){            
             init()
-        }   else if(code =="KeyN"){            
-            init()
-        }else{exit(stepdor)}
-    }, false);  
-    }
+         }
+     }, false);  
+     }
 }
 
 //
